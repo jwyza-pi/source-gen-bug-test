@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SourceGenBugTest", "SourceGenBugTest\SourceGenBugTest.csproj", "{442BCB7A-1CBE-43C6-9E9F-89B6FEC0F380}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SourceGenerator", "SourceGenerator\SourceGenerator.csproj", "{078216AA-CE4F-47D5-83ED-407B9F22B445}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaseLibrary", "BaseLibrary\BaseLibrary.csproj", "{22B52E0F-B43F-4DDC-A5DC-809C04E0DA27}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{442BCB7A-1CBE-43C6-9E9F-89B6FEC0F380}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{442BCB7A-1CBE-43C6-9E9F-89B6FEC0F380}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{442BCB7A-1CBE-43C6-9E9F-89B6FEC0F380}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{442BCB7A-1CBE-43C6-9E9F-89B6FEC0F380}.Release|Any CPU.Build.0 = Release|Any CPU
+		{078216AA-CE4F-47D5-83ED-407B9F22B445}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{078216AA-CE4F-47D5-83ED-407B9F22B445}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{078216AA-CE4F-47D5-83ED-407B9F22B445}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{078216AA-CE4F-47D5-83ED-407B9F22B445}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22B52E0F-B43F-4DDC-A5DC-809C04E0DA27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22B52E0F-B43F-4DDC-A5DC-809C04E0DA27}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22B52E0F-B43F-4DDC-A5DC-809C04E0DA27}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22B52E0F-B43F-4DDC-A5DC-809C04E0DA27}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
