@@ -84,11 +84,6 @@ public class OverrideGenerator : IIncrementalGenerator
         var typeToUse = classSymbol.BaseType;
 
         if (typeToUse?.BaseType is null) return string.Empty;
-
-        if (typeToUse.BaseType.Name == typeToUse.Name)
-        {
-            typeToUse = typeToUse.BaseType;
-        }
         
         var sb = new StringBuilder();
 
@@ -115,21 +110,7 @@ public class OverrideGenerator : IIncrementalGenerator
             sb.AppendLine($"namespace {namespaceName}");
             sb.AppendLine("{");
         }
-       
-
-        Dictionary<string, string> genericTypeMaps = new();
-
-        for (var index = 0; index < typeToUse.TypeParameters.Length; index++)
-        {
-            if (classSymbol.TypeParameters.Length <= index)
-            {
-                break;
-            }
-            
-            var genericParamIn = typeToUse.TypeParameters[index];
-            genericTypeMaps.Add(genericParamIn.Name, classSymbol.TypeParameters[index].Name);
-        }
-
+        
         // Generate the partial class declaration (keeping type parameters out for simplicity)
         sb.AppendLine($"    partial class {classSymbol.Name}");
         sb.AppendLine("    {");
@@ -138,7 +119,6 @@ public class OverrideGenerator : IIncrementalGenerator
         var methods = typeToUse.GetMembers()
             .OfType<IMethodSymbol>()
             .Where(m => !m.IsStatic && m.MethodKind == MethodKind.Ordinary 
-                                    && m.Name != "BindAuthorizationCriteria" 
                                     && m is { IsVirtual: true, DeclaredAccessibility: Accessibility.Protected or Accessibility.Public });
         
         bool hasOverriddenAtLeastOneMethod = false;
@@ -167,7 +147,7 @@ public class OverrideGenerator : IIncrementalGenerator
             }
             
             var parameters =string.Join(", ", parameterStrings);
-            var arguments = string.Join(", ", method.Parameters.Select(p => genericTypeMaps.TryGetValue(p.Name, out var map) ? map: p.Name));
+            var arguments = string.Join(", ", method.Parameters.Select(p => p.Name));
 
             // Get method accessibility.
             var accessibility = method.DeclaredAccessibility.ToString().ToLowerInvariant();
@@ -183,8 +163,6 @@ public class OverrideGenerator : IIncrementalGenerator
             }
 
             // Write the override method.
-            // sb.AppendLine("        [System.Diagnostics.DebuggerStepThrough]");
-            // sb.AppendLine("        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]");
             sb.AppendLine($"        {accessibility} override {(method.IsAsync ? "async" : "")} {returnType} {method.Name}{methodGenericParameters}({parameters})");
             if (returnType.Contains("TProjectionType?"))
             {
